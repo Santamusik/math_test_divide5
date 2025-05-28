@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>조를 알아보기 - 큰 수 학습</title>
+    <title>조를 알아보기 - 수학학습</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <!-- 네비게이션 -->
+      <!-- 내비게이션 -->
       <div class="navigation">
         <a href="page4.html" class="nav-button">⬅️ 이전</a>
         <div class="page-info">
@@ -43,33 +43,26 @@
       </div>
 
       <div class="problem-section">
-        <div class="problem-number">문제</div>
-        <div class="instruction">빈칸에 알맞은 수를 써넣으세요.</div>
+        <div class="problem-header">
+          <span class="problem-number">문제</span> 빈칸에 알맞은 수를 써세요.
+        </div>
 
         <div class="jo-problems">
           <div class="jo-row">
             <span class="text">1000억이 10개인 수는</span>
-            <input
-              type="text"
-              class="jo-input"
-              id="jo1"
-              maxlength="10"
-              placeholder="____"
-            />
-            <span class="text">이라 씁니다.</span>
+            <input type="text" class="jo-input" id="jo1" maxlength="15" />
+            <span class="text">이라 합니다.</span>
           </div>
 
           <div class="complex-place-value">
             <span class="text"
-              >1조가 3745개, 1억이 8670개, 1만이 15937개, 1이 4260개인
-              수는</span
+              >1조가 3745개, 1억이 8670개, 1만이 1593개, 1이 4260개인 수는</span
             >
             <input
               type="text"
               class="jo-input huge"
               id="complex1"
               maxlength="25"
-              placeholder="____"
             />
             <span class="text">입니다.</span>
           </div>
@@ -88,8 +81,8 @@
     <script>
       // 페이지 5 전용 스크립트
       const answers = {
-        jo1: "1조",
-        complex1: "374586701593742600",
+        jo1: "1000000000000",
+        complex1: "3745867015934260",
       };
 
       document
@@ -116,10 +109,12 @@
 
           const result = document.getElementById("result");
           if (allCorrect) {
-            result.textContent = `완벽합니다! 🎉 모든 문제를 맞혔어요!`;
+            result.textContent = `완벽합니다! 🎉 모든 문제를 맞혔어요! 다음 단계로 진행할 수 있습니다!`;
             result.className = "result-message correct";
+            // 페이지 완료 표시
+            pageConfig.markPageCompleted(5);
           } else {
-            result.textContent = `${correctCount}/${totalQuestions} 정답입니다. 다시 한번 생각해보세요!`;
+            result.textContent = `${correctCount}/${totalQuestions} 정답입니다! 다시 한번 생각해보세요!`;
             result.className = "result-message partial";
           }
         });

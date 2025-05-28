@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>뛰어세기 - 큰 수 학습</title>
+    <title>뛰어세기 - 수학학습</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <!-- 네비게이션 -->
+      <!-- 내비게이션 -->
       <div class="navigation">
         <a href="page5.html" class="nav-button">⬅️ 이전</a>
         <div class="page-info">
@@ -21,7 +21,7 @@
         <a href="page7.html" class="nav-button">다음 ➡️</a>
       </div>
 
-      <h1>6차시 | 뛰어세기</h1>
+      <h1>6차시 | 뛰어세기를 알아보기</h1>
 
       <div class="lesson-description">
         <div class="skip-counting-example">
@@ -37,46 +37,23 @@
       </div>
 
       <div class="problem-section">
-        <div class="problem-number">문제</div>
-        <div class="instruction">빈칸에 알맞은 수를 써넣으세요.</div>
+        <div class="problem-header">
+          <span class="problem-number">문제</span> 빈칸에 알맞은 수를 써세요.
+        </div>
 
         <div class="skip-problems">
           <div class="skip-row">
-            <span class="text">10억씩 뛰어 세기: 910억 - 920억 -</span>
-            <input
-              type="text"
-              class="skip-input"
-              id="skip1"
-              maxlength="10"
-              placeholder="____"
-            />
-            <span class="text">- 940억 -</span>
-            <input
-              type="text"
-              class="skip-input"
-              id="skip2"
-              maxlength="10"
-              placeholder="____"
-            />
+            <span class="text">10만씩 뛰어 세기: 1500000 - 2500000 -</span>
+            <input type="text" class="skip-input" id="skip3" maxlength="10" />
+            <span class="text">-</span>
+            <input type="text" class="skip-input" id="skip4" maxlength="10" />
           </div>
 
           <div class="skip-row">
-            <span class="text">10만씩 뛰어 세기: 1500000 - 2500000 -</span>
-            <input
-              type="text"
-              class="skip-input"
-              id="skip3"
-              maxlength="10"
-              placeholder="____"
-            />
-            <span class="text">-</span>
-            <input
-              type="text"
-              class="skip-input"
-              id="skip4"
-              maxlength="10"
-              placeholder="____"
-            />
+            <span class="text">10억씩 뛰어 세기: 910억 - 920억 -</span>
+            <input type="text" class="skip-input" id="skip1" maxlength="10" />
+            <span class="text">- 940억 -</span>
+            <input type="text" class="skip-input" id="skip2" maxlength="10" />
           </div>
         </div>
 
@@ -123,10 +100,12 @@
 
           const result = document.getElementById("result");
           if (allCorrect) {
-            result.textContent = `완벽합니다! 🎉 모든 문제를 맞혔어요!`;
+            result.textContent = `완벽합니다! 🎉 모든 문제를 맞혔어요! 다음 단계로 진행할 수 있습니다!`;
             result.className = "result-message correct";
+            // 페이지 완료 표시
+            pageConfig.markPageCompleted(6);
           } else {
-            result.textContent = `${correctCount}/${totalQuestions} 정답입니다. 다시 한번 생각해보세요!`;
+            result.textContent = `${correctCount}/${totalQuestions} 정답입니다! 다시 한번 생각해보세요!`;
             result.className = "result-message partial";
           }
         });

@@ -3,27 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>큰 수 학습 웹페이지</title>
+    <title>큰수학습 홈페이지</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
         <div class="container">
-        <h1>큰 수 학습 웹페이지</h1>
+        <h1>큰수학습 홈페이지</h1>
         
         <div class="main-menu">
-            <h2>큰 수 알아보기</h2>
+            <h2>큰수를 알아보기</h2>
             <p class="description">아래 학습 단계를 순서대로 진행해보세요!</p>
             
             <div class="page-grid">
                 <a href="page1.html" class="page-card">
                     <div class="page-number">1</div>
-                    <h3>만 알아보기</h3>
-                    <p>1000의 10개인 수를 10000 또는 1만이라 쓰고 읽습니다</p>
+                    <h3>만을 알아보기</h3>
+                    <p>1000이 10개인 수는 10000 이는 1만이라고 합니다</p>
                 </a>
                 
                 <a href="page2.html" class="page-card">
                     <div class="page-number">2</div>
-                    <h3>다섯 자리 수 알아보기</h3>
+                    <h3>다섯 자리 수를 알아보기</h3>
                     <p>46571 -> 4만 6천 5백 7십 1</p>
                 </a>
                 
@@ -36,13 +36,13 @@
                 <a href="page4.html" class="page-card">
                     <div class="page-number">4</div>
                     <h3>억을 알아보기</h3>
-                    <p>1억은 1000만이 10개인 수에요!</p>
+                    <p>1억은 1000만이 10개인 수에요</p>
                 </a>
                 
                 <a href="page5.html" class="page-card">
                     <div class="page-number">5</div>
                     <h3>조를 알아보기</h3>
-                    <p>1조는 1000억이 10개인 수에요!</p>
+                    <p>1조는 1000억이 10개인 수에요</p>
                 </a>
                 
                 <a href="page6.html" class="page-card">
@@ -58,18 +58,18 @@
                 </a>
                 
                 <a href="certificate.html" class="page-card certificate-card">
-                    <div class="page-number">🏆</div>
+                    <div class="page-number">완료</div>
                     <h3>학습 완료 증명서</h3>
-                    <p>모든 학습을 완료하고 증명서를 받아보세요!</p>
+                    <p>모든 학습을 완료하고 증명서를 받아보세요</p>
                 </a>
             </div>
         </div>
         
         <div class="demo-section">
-            <h2>예시 문제</h2>
+            <h2>연습 문제</h2>
             <div class="problem-section">
-                <div class="problem-number">예시</div>
-                <div class="instruction">빈칸에 알맞은 수를 써넣으세요.</div>
+                <div class="problem-number">연습</div>
+                <div class="instruction">빈칸에 알맞은 수를 넣어세요</div>
 
         <div class="math-problem">
           <div class="equation-row">
@@ -82,7 +82,7 @@
               class="answer-input"
               id="answer1"
               maxlength="4"
-              placeholder="____"
+             
             />
             <span class="operator">-</span>
             <input
@@ -90,7 +90,7 @@
               class="answer-input"
               id="answer2"
               maxlength="4"
-              placeholder="____"
+             
             />
             <span class="operator">-</span>
             <span class="number">10000</span>
@@ -107,17 +107,17 @@
     </div>
 
     <script>
-      // 간단한 예시 문제 스크립트
+      // 간단한 연습 문제 스크립트
       document.getElementById('checkAnswer').addEventListener('click', function() {
         const answer1 = document.getElementById('answer1').value;
         const answer2 = document.getElementById('answer2').value;
         const result = document.getElementById('result');
         
         if (answer1 === '9998' && answer2 === '9999') {
-          result.textContent = '정답입니다! 🎉';
+          result.textContent = '정답입니다! 👍';
           result.className = 'result-message correct';
         } else {
-          result.textContent = '다시 생각해보세요. 힌트: 1씩 증가하는 수열입니다.';
+          result.textContent = '다시 생각해보세요. 힌트: 1씩 증가하는 수열입니다';
           result.className = 'result-message incorrect';
         }
       });
@@ -126,6 +126,53 @@
         document.getElementById('answer1').value = '';
         document.getElementById('answer2').value = '';
         document.getElementById('result').textContent = '';
+      });
+    </script>
+    <script src="config.js"></script>
+    <script>
+      // 페이지 접근 제한 적용
+      document.addEventListener('DOMContentLoaded', function() {
+        const completed = pageConfig.getCompletedPages();
+        const pageCards = document.querySelectorAll('.page-card');
+        
+        pageCards.forEach((card, index) => {
+          const pageId = index + 1;
+          const href = card.getAttribute('href');
+          
+          if (href === 'certificate.html') {
+            // 증명서는 모든 7단계 완료 후 접근 가능
+            if (!pageConfig.isCertificateAccessible()) {
+              card.style.opacity = '0.5';
+              card.style.pointerEvents = 'none';
+              card.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('모든 7단계를 완료해야 증명서를 받을 수 있습니다!');
+              });
+            }
+          } else if (pageId > 1) {
+            // 2단계부터는 이전 단계 완료 후 접근 가능
+            if (!pageConfig.isPageAccessible(pageId)) {
+              card.style.opacity = '0.5';
+              card.style.pointerEvents = 'none';
+              card.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert(`${pageId - 1}단계를 먼저 완료해주세요!`);
+              });
+            }
+          }
+          
+          // 완료된 페이지에 체크 표시
+          if (completed.includes(pageId)) {
+            const checkMark = document.createElement('div');
+            checkMark.innerHTML = '✅';
+            checkMark.style.position = 'absolute';
+            checkMark.style.top = '10px';
+            checkMark.style.right = '10px';
+            checkMark.style.fontSize = '1.5em';
+            card.style.position = 'relative';
+            card.appendChild(checkMark);
+          }
+        });
       });
     </script>
   </body>
